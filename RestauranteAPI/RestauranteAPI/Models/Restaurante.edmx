@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RestauranteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Etiquetas">
+          <Key>
+            <PropertyRef Name="IdEtiqueta" />
+          </Key>
+          <Property Name="IdEtiqueta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Etiqueta" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ingredientes">
+          <Key>
+            <PropertyRef Name="IdIngrediente" />
+          </Key>
+          <Property Name="IdIngrediente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ingrediente" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Url Imagen" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medidas">
+          <Key>
+            <PropertyRef Name="IdMedida" />
+          </Key>
+          <Property Name="IdMedida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Medidas" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlatoEtiqueta">
+          <Key>
+            <PropertyRef Name="IdPlatoEtiqueta" />
+          </Key>
+          <Property Name="IdPlatoEtiqueta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPlato" Type="int" Nullable="false" />
+          <Property Name="IdEtiqueta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlatoIngrediente">
+          <Key>
+            <PropertyRef Name="IdPlatoIngrediente" />
+          </Key>
+          <Property Name="IdPlatoIngrediente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Plato" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Unidad de Medida" Type="int" Nullable="false" />
+          <Property Name="Ingrediente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Platos">
+          <Key>
+            <PropertyRef Name="IdPlato" />
+          </Key>
+          <Property Name="IdPlato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Plato" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Categoria" Type="int" Nullable="false" />
+          <Property Name="Imagen" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PlatoEtiqueta_Etiquetas">
+          <End Role="Etiquetas" Type="Self.Etiquetas" Multiplicity="1" />
+          <End Role="PlatoEtiqueta" Type="Self.PlatoEtiqueta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etiquetas">
+              <PropertyRef Name="IdEtiqueta" />
+            </Principal>
+            <Dependent Role="PlatoEtiqueta">
+              <PropertyRef Name="IdEtiqueta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlatoEtiqueta_Platos">
+          <End Role="Platos" Type="Self.Platos" Multiplicity="1" />
+          <End Role="PlatoEtiqueta" Type="Self.PlatoEtiqueta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platos">
+              <PropertyRef Name="IdPlato" />
+            </Principal>
+            <Dependent Role="PlatoEtiqueta">
+              <PropertyRef Name="IdPlato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlatoIngrediente_Ingredientes">
+          <End Role="Ingredientes" Type="Self.Ingredientes" Multiplicity="1" />
+          <End Role="PlatoIngrediente" Type="Self.PlatoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredientes">
+              <PropertyRef Name="IdIngrediente" />
+            </Principal>
+            <Dependent Role="PlatoIngrediente">
+              <PropertyRef Name="Ingrediente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlatoIngrediente_Medidas">
+          <End Role="Medidas" Type="Self.Medidas" Multiplicity="1" />
+          <End Role="PlatoIngrediente" Type="Self.PlatoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medidas">
+              <PropertyRef Name="IdMedida" />
+            </Principal>
+            <Dependent Role="PlatoIngrediente">
+              <PropertyRef Name="Unidad de Medida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlatoIngrediente_Platos">
+          <End Role="Platos" Type="Self.Platos" Multiplicity="1" />
+          <End Role="PlatoIngrediente" Type="Self.PlatoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platos">
+              <PropertyRef Name="IdPlato" />
+            </Principal>
+            <Dependent Role="PlatoIngrediente">
+              <PropertyRef Name="Plato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platos_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestauranteModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etiquetas" EntityType="Self.Etiquetas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingredientes" EntityType="Self.Ingredientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medidas" EntityType="Self.Medidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlatoEtiqueta" EntityType="Self.PlatoEtiqueta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlatoIngrediente" EntityType="Self.PlatoIngrediente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Platos" EntityType="Self.Platos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PlatoEtiqueta_Etiquetas" Association="Self.FK_PlatoEtiqueta_Etiquetas">
+            <End Role="Etiquetas" EntitySet="Etiquetas" />
+            <End Role="PlatoEtiqueta" EntitySet="PlatoEtiqueta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlatoEtiqueta_Platos" Association="Self.FK_PlatoEtiqueta_Platos">
+            <End Role="Platos" EntitySet="Platos" />
+            <End Role="PlatoEtiqueta" EntitySet="PlatoEtiqueta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlatoIngrediente_Ingredientes" Association="Self.FK_PlatoIngrediente_Ingredientes">
+            <End Role="Ingredientes" EntitySet="Ingredientes" />
+            <End Role="PlatoIngrediente" EntitySet="PlatoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlatoIngrediente_Medidas" Association="Self.FK_PlatoIngrediente_Medidas">
+            <End Role="Medidas" EntitySet="Medidas" />
+            <End Role="PlatoIngrediente" EntitySet="PlatoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlatoIngrediente_Platos" Association="Self.FK_PlatoIngrediente_Platos">
+            <End Role="Platos" EntitySet="Platos" />
+            <End Role="PlatoIngrediente" EntitySet="PlatoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platos_Categoria" Association="Self.FK_Platos_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestauranteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Categoria" FromRole="Categoria" ToRole="Platos" />
+        </EntityType>
+        <EntityType Name="Etiquetas">
+          <Key>
+            <PropertyRef Name="IdEtiqueta" />
+          </Key>
+          <Property Name="IdEtiqueta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Etiqueta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PlatoEtiqueta" Relationship="Self.FK_PlatoEtiqueta_Etiquetas" FromRole="Etiquetas" ToRole="PlatoEtiqueta" />
+        </EntityType>
+        <EntityType Name="Ingredientes">
+          <Key>
+            <PropertyRef Name="IdIngrediente" />
+          </Key>
+          <Property Name="IdIngrediente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ingrediente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url_Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PlatoIngrediente" Relationship="Self.FK_PlatoIngrediente_Ingredientes" FromRole="Ingredientes" ToRole="PlatoIngrediente" />
+        </EntityType>
+        <EntityType Name="Medidas">
+          <Key>
+            <PropertyRef Name="IdMedida" />
+          </Key>
+          <Property Name="IdMedida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Medidas1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PlatoIngrediente" Relationship="Self.FK_PlatoIngrediente_Medidas" FromRole="Medidas" ToRole="PlatoIngrediente" />
+        </EntityType>
+        <EntityType Name="PlatoEtiqueta">
+          <Key>
+            <PropertyRef Name="IdPlatoEtiqueta" />
+          </Key>
+          <Property Name="IdPlatoEtiqueta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPlato" Type="Int32" Nullable="false" />
+          <Property Name="IdEtiqueta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Etiquetas" Relationship="Self.FK_PlatoEtiqueta_Etiquetas" FromRole="PlatoEtiqueta" ToRole="Etiquetas" />
+          <NavigationProperty Name="Platos" Relationship="Self.FK_PlatoEtiqueta_Platos" FromRole="PlatoEtiqueta" ToRole="Platos" />
+        </EntityType>
+        <EntityType Name="PlatoIngrediente">
+          <Key>
+            <PropertyRef Name="IdPlatoIngrediente" />
+          </Key>
+          <Property Name="IdPlatoIngrediente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Plato" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Unidad_de_Medida" Type="Int32" Nullable="false" />
+          <Property Name="Ingrediente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ingredientes" Relationship="Self.FK_PlatoIngrediente_Ingredientes" FromRole="PlatoIngrediente" ToRole="Ingredientes" />
+          <NavigationProperty Name="Medidas" Relationship="Self.FK_PlatoIngrediente_Medidas" FromRole="PlatoIngrediente" ToRole="Medidas" />
+          <NavigationProperty Name="Platos" Relationship="Self.FK_PlatoIngrediente_Platos" FromRole="PlatoIngrediente" ToRole="Platos" />
+        </EntityType>
+        <EntityType Name="Platos">
+          <Key>
+            <PropertyRef Name="IdPlato" />
+          </Key>
+          <Property Name="IdPlato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Plato" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Categoria" Type="Int32" Nullable="false" />
+          <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Categoria1" Relationship="Self.FK_Platos_Categoria" FromRole="Platos" ToRole="Categoria" />
+          <NavigationProperty Name="PlatoEtiqueta" Relationship="Self.FK_PlatoEtiqueta_Platos" FromRole="Platos" ToRole="PlatoEtiqueta" />
+          <NavigationProperty Name="PlatoIngrediente" Relationship="Self.FK_PlatoIngrediente_Platos" FromRole="Platos" ToRole="PlatoIngrediente" />
+        </EntityType>
+        <Association Name="FK_Platos_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Platos">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlatoEtiqueta_Etiquetas">
+          <End Role="Etiquetas" Type="Self.Etiquetas" Multiplicity="1" />
+          <End Role="PlatoEtiqueta" Type="Self.PlatoEtiqueta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etiquetas">
+              <PropertyRef Name="IdEtiqueta" />
+            </Principal>
+            <Dependent Role="PlatoEtiqueta">
+              <PropertyRef Name="IdEtiqueta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlatoIngrediente_Ingredientes">
+          <End Role="Ingredientes" Type="Self.Ingredientes" Multiplicity="1" />
+          <End Role="PlatoIngrediente" Type="Self.PlatoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredientes">
+              <PropertyRef Name="IdIngrediente" />
+            </Principal>
+            <Dependent Role="PlatoIngrediente">
+              <PropertyRef Name="Ingrediente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlatoIngrediente_Medidas">
+          <End Role="Medidas" Type="Self.Medidas" Multiplicity="1" />
+          <End Role="PlatoIngrediente" Type="Self.PlatoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medidas">
+              <PropertyRef Name="IdMedida" />
+            </Principal>
+            <Dependent Role="PlatoIngrediente">
+              <PropertyRef Name="Unidad_de_Medida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlatoEtiqueta_Platos">
+          <End Role="Platos" Type="Self.Platos" Multiplicity="1" />
+          <End Role="PlatoEtiqueta" Type="Self.PlatoEtiqueta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platos">
+              <PropertyRef Name="IdPlato" />
+            </Principal>
+            <Dependent Role="PlatoEtiqueta">
+              <PropertyRef Name="IdPlato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlatoIngrediente_Platos">
+          <End Role="Platos" Type="Self.Platos" Multiplicity="1" />
+          <End Role="PlatoIngrediente" Type="Self.PlatoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platos">
+              <PropertyRef Name="IdPlato" />
+            </Principal>
+            <Dependent Role="PlatoIngrediente">
+              <PropertyRef Name="Plato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Restaurantes" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Etiquetas" EntityType="Self.Etiquetas" />
+          <EntitySet Name="Ingredientes" EntityType="Self.Ingredientes" />
+          <EntitySet Name="Medidas" EntityType="Self.Medidas" />
+          <EntitySet Name="PlatoEtiqueta" EntityType="Self.PlatoEtiqueta" />
+          <EntitySet Name="PlatoIngrediente" EntityType="Self.PlatoIngrediente" />
+          <EntitySet Name="Platos" EntityType="Self.Platos" />
+          <AssociationSet Name="FK_Platos_Categoria" Association="Self.FK_Platos_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Platos" EntitySet="Platos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlatoEtiqueta_Etiquetas" Association="Self.FK_PlatoEtiqueta_Etiquetas">
+            <End Role="Etiquetas" EntitySet="Etiquetas" />
+            <End Role="PlatoEtiqueta" EntitySet="PlatoEtiqueta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlatoIngrediente_Ingredientes" Association="Self.FK_PlatoIngrediente_Ingredientes">
+            <End Role="Ingredientes" EntitySet="Ingredientes" />
+            <End Role="PlatoIngrediente" EntitySet="PlatoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlatoIngrediente_Medidas" Association="Self.FK_PlatoIngrediente_Medidas">
+            <End Role="Medidas" EntitySet="Medidas" />
+            <End Role="PlatoIngrediente" EntitySet="PlatoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlatoEtiqueta_Platos" Association="Self.FK_PlatoEtiqueta_Platos">
+            <End Role="Platos" EntitySet="Platos" />
+            <End Role="PlatoEtiqueta" EntitySet="PlatoEtiqueta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlatoIngrediente_Platos" Association="Self.FK_PlatoIngrediente_Platos">
+            <End Role="Platos" EntitySet="Platos" />
+            <End Role="PlatoIngrediente" EntitySet="PlatoIngrediente" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestauranteModelStoreContainer" CdmEntityContainer="Restaurantes">
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="RestauranteModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etiquetas">
+            <EntityTypeMapping TypeName="RestauranteModel.Etiquetas">
+              <MappingFragment StoreEntitySet="Etiquetas">
+                <ScalarProperty Name="IdEtiqueta" ColumnName="IdEtiqueta" />
+                <ScalarProperty Name="Etiqueta" ColumnName="Etiqueta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredientes">
+            <EntityTypeMapping TypeName="RestauranteModel.Ingredientes">
+              <MappingFragment StoreEntitySet="Ingredientes">
+                <ScalarProperty Name="IdIngrediente" ColumnName="IdIngrediente" />
+                <ScalarProperty Name="Ingrediente" ColumnName="Ingrediente" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Url_Imagen" ColumnName="Url Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medidas">
+            <EntityTypeMapping TypeName="RestauranteModel.Medidas">
+              <MappingFragment StoreEntitySet="Medidas">
+                <ScalarProperty Name="IdMedida" ColumnName="IdMedida" />
+                <ScalarProperty Name="Medidas1" ColumnName="Medidas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlatoEtiqueta">
+            <EntityTypeMapping TypeName="RestauranteModel.PlatoEtiqueta">
+              <MappingFragment StoreEntitySet="PlatoEtiqueta">
+                <ScalarProperty Name="IdPlatoEtiqueta" ColumnName="IdPlatoEtiqueta" />
+                <ScalarProperty Name="IdPlato" ColumnName="IdPlato" />
+                <ScalarProperty Name="IdEtiqueta" ColumnName="IdEtiqueta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlatoIngrediente">
+            <EntityTypeMapping TypeName="RestauranteModel.PlatoIngrediente">
+              <MappingFragment StoreEntitySet="PlatoIngrediente">
+                <ScalarProperty Name="IdPlatoIngrediente" ColumnName="IdPlatoIngrediente" />
+                <ScalarProperty Name="Plato" ColumnName="Plato" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Unidad_de_Medida" ColumnName="Unidad de Medida" />
+                <ScalarProperty Name="Ingrediente" ColumnName="Ingrediente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Platos">
+            <EntityTypeMapping TypeName="RestauranteModel.Platos">
+              <MappingFragment StoreEntitySet="Platos">
+                <ScalarProperty Name="IdPlato" ColumnName="IdPlato" />
+                <ScalarProperty Name="Plato" ColumnName="Plato" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e4228ed75e47445094b2120f9e1d31fc" Name="Diagram1">
+        <EntityTypeShape EntityType="RestauranteModel.Categoria" Width="1.5" PointX="6.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Etiquetas" Width="1.5" PointX="8.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Ingredientes" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Medidas" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.PlatoEtiqueta" Width="1.5" PointX="6.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.PlatoIngrediente" Width="1.5" PointX="2.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Platos" Width="1.5" PointX="4.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="RestauranteModel.FK_Platos_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK_PlatoEtiqueta_Etiquetas" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK_PlatoIngrediente_Ingredientes" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK_PlatoIngrediente_Medidas" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK_PlatoEtiqueta_Platos" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK_PlatoIngrediente_Platos" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

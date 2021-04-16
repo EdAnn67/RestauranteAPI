@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RestauranteModelStoreContainer" CdmEntityContainer="Restaurantes">
+    <EntitySetMapping Name="Categoria">
+      <EntityTypeMapping TypeName="RestauranteModel.Categoria">
+        <MappingFragment StoreEntitySet="Categoria">
+          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+          <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Etiquetas">
+      <EntityTypeMapping TypeName="RestauranteModel.Etiquetas">
+        <MappingFragment StoreEntitySet="Etiquetas">
+          <ScalarProperty Name="IdEtiqueta" ColumnName="IdEtiqueta" />
+          <ScalarProperty Name="Etiqueta" ColumnName="Etiqueta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ingredientes">
+      <EntityTypeMapping TypeName="RestauranteModel.Ingredientes">
+        <MappingFragment StoreEntitySet="Ingredientes">
+          <ScalarProperty Name="IdIngrediente" ColumnName="IdIngrediente" />
+          <ScalarProperty Name="Ingrediente" ColumnName="Ingrediente" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Url_Imagen" ColumnName="Url Imagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medidas">
+      <EntityTypeMapping TypeName="RestauranteModel.Medidas">
+        <MappingFragment StoreEntitySet="Medidas">
+          <ScalarProperty Name="IdMedida" ColumnName="IdMedida" />
+          <ScalarProperty Name="Medidas1" ColumnName="Medidas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlatoEtiqueta">
+      <EntityTypeMapping TypeName="RestauranteModel.PlatoEtiqueta">
+        <MappingFragment StoreEntitySet="PlatoEtiqueta">
+          <ScalarProperty Name="IdPlatoEtiqueta" ColumnName="IdPlatoEtiqueta" />
+          <ScalarProperty Name="IdPlato" ColumnName="IdPlato" />
+          <ScalarProperty Name="IdEtiqueta" ColumnName="IdEtiqueta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlatoIngrediente">
+      <EntityTypeMapping TypeName="RestauranteModel.PlatoIngrediente">
+        <MappingFragment StoreEntitySet="PlatoIngrediente">
+          <ScalarProperty Name="IdPlatoIngrediente" ColumnName="IdPlatoIngrediente" />
+          <ScalarProperty Name="Plato" ColumnName="Plato" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Unidad_de_Medida" ColumnName="Unidad de Medida" />
+          <ScalarProperty Name="Ingrediente" ColumnName="Ingrediente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Platos">
+      <EntityTypeMapping TypeName="RestauranteModel.Platos">
+        <MappingFragment StoreEntitySet="Platos">
+          <ScalarProperty Name="IdPlato" ColumnName="IdPlato" />
+          <ScalarProperty Name="Plato" ColumnName="Plato" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
