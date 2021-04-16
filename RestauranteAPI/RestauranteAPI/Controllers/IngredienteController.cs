@@ -55,7 +55,7 @@ namespace RestauranteAPI.Controllers
                 return NotFound();
             }
         }
-        [Route("api/Ingrediente/Platos/{id}")]
+        [Route("~/api/Ingrediente/Platos/{id:int}")]
         [HttpGet]
         public IHttpActionResult Platos(int id)
         {
@@ -67,7 +67,7 @@ namespace RestauranteAPI.Controllers
                 Where P_I.Ingrediente = @id";
                 using (var db = new Restaurantes())
                 {
-                    return Ok(db.Database.SqlQuery<Clase2>(sql, new SqlParameter("@id", id)).ToList());
+                    return Ok(db.Database.SqlQuery<Clase3>(sql, new SqlParameter("@id", id)).ToList());
                 }
             }
             catch (Exception e)

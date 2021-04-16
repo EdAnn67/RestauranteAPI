@@ -1,0 +1,5 @@
+Video de YouTube (Uso de Postman)
+http://youtu.be/mIu23zNcgf8?hd=1
+
+Video 2 (Explicacion de EndPoints)
+http://youtu.be/5VaLfwn3dmg?hd=1

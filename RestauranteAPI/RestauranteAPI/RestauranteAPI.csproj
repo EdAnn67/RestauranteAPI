@@ -175,6 +175,8 @@
     </Compile>
     <Compile Include="Models\Clase1.cs" />
     <Compile Include="Models\Clase2.cs" />
+    <Compile Include="Models\Clase3.cs" />
+    <Compile Include="Models\Clase4.cs" />
     <Compile Include="Models\Etiquetas.cs">
       <DependentUpon>Restaurante.tt</DependentUpon>
     </Compile>

@@ -33,7 +33,7 @@ namespace RestauranteAPI.Controllers
             }
         }
 
-        [Route("api/Plato/Etiquetas/")]
+        [Route("~/api/Plato/Etiquetas/")]
         [HttpGet]
         public IHttpActionResult NumeroEtiquetas()
         {
@@ -46,7 +46,7 @@ namespace RestauranteAPI.Controllers
                 Group By P.Plato;";
                 using (var db = new Restaurantes())
                 {
-                    return Ok(db.Database.SqlQuery<Ingredientes>(sql).ToList());
+                    return Ok(db.Database.SqlQuery<Clase4>(sql).ToList());
                 }
             }
             catch (Exception e)
@@ -55,7 +55,7 @@ namespace RestauranteAPI.Controllers
             }
         }
 
-        [Route("api/Plato/Ingredientes/")]
+        [Route("~/api/Plato/Ingredientes/")]
         [HttpGet]
         public IHttpActionResult Ingredientes()
         {
@@ -77,6 +77,8 @@ namespace RestauranteAPI.Controllers
             }
         }
 
+        [Route("~/api/Plato/Ultimo/")]
+        [HttpGet]
         public IHttpActionResult Ultimo()
         {
             try
